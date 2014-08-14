@@ -1,11 +1,25 @@
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
+(setq default-directory "C:/Documents and Settings/bcourtney/Desktop/" )
+
+(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("python" . python-mode)
+                                      interpreter-mode-alist))
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+
+(add-hook 'text-mode-hook
+  (function
+   (lambda ()
+     (setq tab-width 4)
+     (define-key text-mode-map "\C-i" 'self-insert-command)
+     )))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -28,7 +42,7 @@
  '(hl-paren-background-colors (quote ("#2492db" "#95a5a6" nil)))
  '(hl-paren-colors (quote ("#ecf0f1" "#ecf0f1" "#c0392b")))
  '(ido-mode nil nil (ido))
- '(linum-format " %6d ")
+ '(linum-format " %1d ")
  '(magit-diff-use-overlays nil)
  '(main-line-color1 "#222232")
  '(main-line-color2 "#333343")
@@ -52,28 +66,23 @@
  ;; If there is more than one, they won't work right.
  )
 
-(global-linum-mode t)
+(global-linum-mode 1)
 (setq inhibit-startup-message   t)   ; Don't want any startup message 
 (setq make-backup-files         nil) ; Don't want any backup files 
 (setq search-highlight           t) ; Highlight search object 
 (setq initial-scratch-message "")
-
+(global-hl-line-mode 1)
+(show-paren-mode 1)
 (tool-bar-mode -1) 
-
-(global-set-key (kbd "TAB") 'self-insert-command);
-
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
+ 
 
 (require 'tabbar)
 ; turn on the tabbar
 (tabbar-mode t)
-; define all tabs to be one of 3 possible groups: ¡°Emacs Buffer¡±, ¡°Dired¡±,
-;¡°User Buffer¡±.
+; define all tabs to be one of 3 possible groups: Â¡Â°Emacs BufferÂ¡Â±, Â¡Â°DiredÂ¡Â±,
+;Â¡Â°User BufferÂ¡Â±.
 
 (defun tabbar-buffer-groups ()
-
 
   (list
    (cond
@@ -121,5 +130,14 @@
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
-(global-set-key [M-left] 'tabbar-backward)
-(global-set-key [M-right] 'tabbar-forward)
+(global-set-key (kbd "M-[") 'tabbar-backward)
+(global-set-key (kbd "M-]") 'tabbar-forward)
+
+(require 'expand-region)
+    (global-set-key (kbd "C-=") 'er/expand-region)
+
+(require 'change-inner)
+    (global-set-key (kbd "M-i") 'change-inner)
+    (global-set-key (kbd "M-o") 'change-outer)
+
+(delete-selection-mode 1)
