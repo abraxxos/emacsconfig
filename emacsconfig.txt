@@ -7,29 +7,36 @@
 (package-initialize) ;; You might already have this line
 
 (setq default-directory "~/" )
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(add-hook 'text-mode-hook
-	  (function
-	   (lambda ()
-	     (setq tab-width 4)
-	     (define-key text-mode-map "\C-i" 'self-insert-command)
-	     )))
+(require 'neotree)
+(neotree-toggle)
+
+(toggle-scroll-bar -1)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(ansi-term-color-vector
    [unspecified "#081724" "#ff694d" "#68f6cb" "#fffe4e" "#bad6e2" "#afc0fd" "#d2f1ff" "#d3f9ee"])
+ '(background-color "#042028")
+ '(background-mode dark)
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-enabled-themes (quote (cyberpunk)))
+ '(cursor-color "#708183")
+ '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes
    (quote
-    ("f0a99f53cbf7b004ba0c1760aa14fd70f2eabafe4e62a2b3cf5cabae8203113b" "e24180589c0267df991cf54bf1a795c07d00b24169206106624bb844292807b9" "97a2b10275e3e5c67f46ddaac0ec7969aeb35068c03ec4157cf4887c401e74b1" "547c8cab5d78ecbd1bd8d51ba1be51fa14ab7c4a728147d90ccf23c8797cb640" "e292ec749f785d348969926448e25790356a7ce1a8fda6e695f5e8b70bed786b" "572caef0c27b100a404db8d540fd5b31397f90ab660ef5539ff0863ff9bee26a" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" "2affb26fb9a1b9325f05f4233d08ccbba7ec6e0c99c64681895219f964aac7af" "297063d0000ca904abb446944398843edaa7ef2c659b7f9087d724bf6f8c1d1f" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "c739f435660ca9d9e77312cbb878d5d7fd31e386a7758c982fa54a49ffd47f6e" "024b0033a950d6a40bbbf2b1604075e6c457d40de0b52debe3ae994f88c09a4a" "96efbabfb6516f7375cdf85e7781fe7b7249b6e8114676d65337a1ffe78b78d9" "7694bfb46ec19cfc47093783633d8cd4df208d620104910bf5c1c840528a8dd1" "7ed6913f96c43796aa524e9ae506b0a3a50bfca061eed73b66766d14adfa86d1" "ca229a0a89717c8a6fe5cd580ee2a85536fbafce6acb107d33cf38d52e2f492c" "50edb7914e8d369bc03820d2dcde7e74b7efe2af5a39511d3a130508e2f6ac8f" "8b231ba3e5f61c2bb1bc3a2d84cbd16ea17ca13395653566d4dfbb11feaf8567" "0795e2c85394140788d72d34969be4acb305e4a54149e7237787d9df27832fbb" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("71d2c6ecf7b42f3bd92e2bb2e2ffd163eaf14427679999aebee366a40fd66e4f" "bf66ec2f5e041d5fa44309089250e179ed6d1292c5c0722cc0dfbc93bd46e0a4" "1a53efc62256480d5632c057d9e726b2e64714d871e23e43816735e1b85c144c" "6df30cfb75df80e5808ac1557d5cc728746c8dbc9bc726de35b15180fa6e0ad9" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "bcc6775934c9adf5f3bd1f428326ce0dcd34d743a92df48c128e6438b815b44f" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "f0a99f53cbf7b004ba0c1760aa14fd70f2eabafe4e62a2b3cf5cabae8203113b" "e24180589c0267df991cf54bf1a795c07d00b24169206106624bb844292807b9" "97a2b10275e3e5c67f46ddaac0ec7969aeb35068c03ec4157cf4887c401e74b1" "547c8cab5d78ecbd1bd8d51ba1be51fa14ab7c4a728147d90ccf23c8797cb640" "e292ec749f785d348969926448e25790356a7ce1a8fda6e695f5e8b70bed786b" "572caef0c27b100a404db8d540fd5b31397f90ab660ef5539ff0863ff9bee26a" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" "2affb26fb9a1b9325f05f4233d08ccbba7ec6e0c99c64681895219f964aac7af" "297063d0000ca904abb446944398843edaa7ef2c659b7f9087d724bf6f8c1d1f" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "c739f435660ca9d9e77312cbb878d5d7fd31e386a7758c982fa54a49ffd47f6e" "024b0033a950d6a40bbbf2b1604075e6c457d40de0b52debe3ae994f88c09a4a" "96efbabfb6516f7375cdf85e7781fe7b7249b6e8114676d65337a1ffe78b78d9" "7694bfb46ec19cfc47093783633d8cd4df208d620104910bf5c1c840528a8dd1" "7ed6913f96c43796aa524e9ae506b0a3a50bfca061eed73b66766d14adfa86d1" "ca229a0a89717c8a6fe5cd580ee2a85536fbafce6acb107d33cf38d52e2f492c" "50edb7914e8d369bc03820d2dcde7e74b7efe2af5a39511d3a130508e2f6ac8f" "8b231ba3e5f61c2bb1bc3a2d84cbd16ea17ca13395653566d4dfbb11feaf8567" "0795e2c85394140788d72d34969be4acb305e4a54149e7237787d9df27832fbb" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(fci-rule-color "#383838")
+ '(foreground-color "#708183")
  '(fringe-mode 10 nil (fringe))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
@@ -55,6 +62,13 @@
  '(magit-diff-use-overlays nil)
  '(main-line-color1 "#222232")
  '(main-line-color2 "#333343")
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa" . "http://melpa.org/packages/")
+     ("marmalade" . "http://marmalade-repo.org/packages/"))))
+ '(pos-tip-background-color "#A6E22E")
+ '(pos-tip-foreground-color "#272822")
  '(powerline-color1 "#222232")
  '(powerline-color2 "#333343")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
@@ -84,13 +98,33 @@
  '(weechat-color-list
    (quote
     (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83"))))
+
+(add-hook 'text-mode-hook
+       	  (function
+       	   (lambda ()
+       	     (setq tab-width 4)
+       	     (define-key text-mode-map "\C-i" 'self-insert-command)
+       	     )))
+
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-function-name-face ((t (:foreground "deep pink")))))
-(global-linum-mode 1)
+ '(font-lock-function-name-face ((t (:foreground "deep pink"))))
+ '(font-lock-variable-name-face ((t (:foreground "#8ac6f2"))))
+ '(hl-line ((t (:background "#424242"))))
+ '(isearch ((t (:background "maroon" :foreground "LightPink1"))))
+ '(region ((t (:background "maroon" :foreground "#f6f3e8"))))
+ '(tabbar-separator ((t (:inherit tabbar-default :background "gray20" :height 1))))
+ '(underline ((t nil))))
+
 (setq inhibit-startup-message t) ; Don't want any startup message
 (setq make-backup-files nil) ; Don't want any backup files
 (setq search-highlight t) ; Highlight search object
@@ -99,10 +133,27 @@
 (show-paren-mode 1)
 (tool-bar-mode -1)
 (require 'tabbar)
-					; turn on the tabbar
+       					; turn on the tabbar
 (tabbar-mode t)
-					; define all tabs to be one of 3 possible groups: ¡°Emacs Buffer¡±, ¡°Dired¡±,
-					;¡°User Buffer¡±.
+
+(defun tabbar-buffer-tab-label (tab)
+  "Return a label for TAB.
+That is, a string used to represent it on the tab bar."
+  (let ((label  (if tabbar--buffer-show-groups
+                    (format " [%s]" (tabbar-tab-tabset tab))
+                  (format " %s" (tabbar-tab-value tab)))))
+    ;; Unless the tab bar auto scrolls to keep the selected tab
+    ;; visible, shorten the tab label to keep as many tabs as possible
+    ;; in the visible area of the tab bar.
+    (if tabbar-auto-scroll-flag
+        label
+      (tabbar-shorten
+       label (max 1 (/ (window-width)
+                       (length (tabbar-view
+                                (tabbar-current-tabset)))))))))
+
+       					; define all tabs to be one of 3 possible groups: ¡°Emacs Buffer¡±, ¡°Dired¡±,
+       					;¡°User Buffer¡±.
 (defun tabbar-buffer-groups ()
   (list
    (cond
@@ -114,12 +165,13 @@
      )
     (t
      "User Buffer"
-     )
+   )
     )))
 (set-face-attribute
  'tabbar-default nil
  :background "gray20"
  :foreground "gray20"
+ :height 2
  :box '(:line-width 1 :color "gray20" :style nil))
 (set-face-attribute
  'tabbar-unselected nil
@@ -141,7 +193,7 @@
  'tabbar-button nil
  :box '(:line-width 1 :color "gray20" :style nil))
 (set-face-attribute
- 'tabbar-separator nil
+'tabbar-separator nil
  :background "gray20"
  :height 0.6)
 
@@ -154,3 +206,32 @@
 (global-set-key (kbd "M-i") 'change-inner)
 (global-set-key (kbd "M-o") 'change-outer)
 (delete-selection-mode 1)
+
+;;MAJOR AND MINOR MODE SETTINGS
+;;-----------------------------
+;; Initial Mode
+(setq initial-major-mode 'text-mode)
+
+;; JSON Mode Validation and collapse and autocomplete
+(add-hook 'json-mode-hook 'flymake-json-load)
+(add-hook 'json-mode-hook 'yafolding-mode)
+(add-hook 'json-mode-hook 'auto-complete-mode)
+(defun json-linum-hook ()
+  (linum-mode 1))
+(add-hook 'json-mode-hook 'json-linum-hook)
+
+;; YAML Mode Validation and collapse and autocomplete
+(add-hook 'yaml-mode-hook 'flymake-yaml-load)
+(add-hook 'yaml-mode-hook 'yafolding-mode)
+(add-hook 'yaml-mode-hook 'auto-complete-mode)
+(defun yaml-linum-hook ()
+  (linum-mode 1))
+(add-hook 'yaml-mode-hook 'yaml-linum-hook)
+
+;; Python Mode Validation and collapse and autocomplete
+(add-hook 'python-mode-hook 'flymake-python-load)
+(add-hook 'python-mode-hook 'yafolding-mode)
+(add-hook 'python-mode-hook 'auto-complete-mode)
+(defun python-linum-hook ()
+  (linum-mode 1))
+(add-hook 'python-mode-hook 'python-linum-hook)
