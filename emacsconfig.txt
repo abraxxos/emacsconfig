@@ -9,8 +9,14 @@
 (setq default-directory "~/" )
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 (require 'neotree)
-(neotree-toggle)
+(setq neo-window-width 40)
+(neotree)
+
+(setq minimap-major-modes '(prog-mode json-mode))
 
 (toggle-scroll-bar -1)
 
@@ -62,6 +68,10 @@
  '(magit-diff-use-overlays nil)
  '(main-line-color1 "#222232")
  '(main-line-color2 "#333343")
+ '(minimap-mode t)
+ '(minimap-recenter-type (quote free))
+ '(minimap-update-delay 0)
+ '(minimap-window-location (quote right))
  '(package-archives
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
@@ -121,6 +131,7 @@
  '(font-lock-variable-name-face ((t (:foreground "#8ac6f2"))))
  '(hl-line ((t (:background "#424242"))))
  '(isearch ((t (:background "maroon" :foreground "LightPink1"))))
+ '(neo-header-face ((t (:foreground "#242424"))))
  '(region ((t (:background "maroon" :foreground "#f6f3e8"))))
  '(tabbar-separator ((t (:inherit tabbar-default :background "gray20" :height 1))))
  '(underline ((t nil))))
